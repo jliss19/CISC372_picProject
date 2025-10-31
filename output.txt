@@ -1,0 +1,10 @@
+Script started on Fri Oct 31 17:58:44 2025
+]0;jliss@r1n06.darwin:~/CISC372_picProject[?1034h[jliss@r1n06 CISC372_picProject]$ srun ./image pic1.jpg blur
+Took 8 seconds
+]0;jliss@r1n06.darwin:~/CISC372_picProject[jliss@r1n06 CISC372_picProject]$ srun ./image_omp pic1.jpg blur
+Using 4 OpenMP threads
+Took 8 seconds
+]0;jliss@r1n06.darwin:~/CISC372_picProject[jliss@r1n06 CISC372_picProject]$ exit
+exit
+
+Script done on Fri Oct 31 17:59:23 2025
