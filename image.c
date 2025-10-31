@@ -123,14 +123,16 @@ void convolute(Image* srcImage,Image* destImage,Matrix algorithm){
     
     // Create threads
     int currentRow = 0;
-    for (int i = 0; i < numThreads; i++) {
+    int i;
+    int rowsForThisThread;
+    for (i = 0; i < numThreads; i++) {
         threadData[i].srcImage = srcImage;
         threadData[i].destImage = destImage;
         memcpy(threadData[i].algorithm, algorithm, sizeof(Matrix));
         threadData[i].startRow = currentRow;
         
         // Distribute extra rows among first few threads
-        int rowsForThisThread = rowsPerThread + (i < extraRows ? 1 : 0);
+        rowsForThisThread = rowsPerThread + (i < extraRows ? 1 : 0);
         threadData[i].endRow = currentRow + rowsForThisThread;
         
         pthread_create(&threads[i], NULL, convoluteThread, &threadData[i]);
@@ -138,7 +140,7 @@ void convolute(Image* srcImage,Image* destImage,Matrix algorithm){
     }
     
     // Wait for all threads to complete
-    for (int i = 0; i < numThreads; i++) {
+    for (i = 0; i < numThreads; i++) {
         pthread_join(threads[i], NULL);
     }
     
